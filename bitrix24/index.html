@@ -1,0 +1,1161 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Битрикс24 — внедрение и интеграции | AGENCY</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Внедрение и реанимация Битрикс24, автоматизация процессов, интеграции с сайтами, сервисами и ботами.">
+  <style>
+    /* тот же стиль, что и на главной */
+    :root {
+      --bg-main: #05060a;
+      --bg-alt: #0a0d13;
+      --accent: #3b82f6;
+      --accent-soft: rgba(59,130,246,0.12);
+      --text-main: #f9fafb;
+      --text-muted: #9ca3af;
+      --border-soft: #1f2937;
+      --radius-lg: 18px;
+      --shadow-soft: 0 18px 45px rgba(0,0,0,0.55);
+      --transition-fast: 0.18s ease-out;
+      --container-width: 1120px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top, #111827 0, #020617 55%, #000 100%);
+      color: var(--text-main);
+      line-height: 1.6;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    .container {
+      width: 100%;
+      max-width: var(--container-width);
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      backdrop-filter: blur(16px);
+      background: linear-gradient(to bottom, rgba(2,6,23,0.95), rgba(2,6,23,0.65), transparent);
+      border-bottom: 1px solid rgba(31,41,55,0.6);
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 0;
+    }
+
+    .logo {
+      font-size: 20px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .logo-badge {
+      width: 26px;
+      height: 26px;
+      border-radius: 999px;
+      background: radial-gradient(circle at 30% 0, #60a5fa, #3b82f6 45%, #1d4ed8 100%);
+      box-shadow: 0 0 18px rgba(59,130,246,0.7);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 20px;
+      font-size: 14px;
+      color: var(--text-muted);
+    }
+
+    .nav-links a {
+      padding: 6px 10px;
+      border-radius: 999px;
+      transition: background var(--transition-fast), color var(--transition-fast), transform var(--transition-fast);
+    }
+
+    .nav-links a:hover {
+      color: var(--text-main);
+      background: rgba(31,41,55,0.9);
+      transform: translateY(-1px);
+    }
+
+    .nav-cta {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 9px 18px;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      font-size: 14px;
+      cursor: pointer;
+      transition: background var(--transition-fast), color var(--transition-fast), box-shadow var(--transition-fast), transform var(--transition-fast), border-color var(--transition-fast);
+      white-space: nowrap;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #3b82f6, #2563eb);
+      box-shadow: 0 12px 30px rgba(37,99,235,0.55);
+      border-color: rgba(191,219,254,0.3);
+      color: #e5f0ff;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 18px 44px rgba(37,99,235,0.7);
+      background: linear-gradient(135deg, #2563eb, #1d4ed8);
+    }
+
+    .btn-secondary {
+      background: rgba(15,23,42,0.85);
+      border-color: rgba(148,163,184,0.35);
+      color: var(--text-main);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(15,23,42,1);
+      border-color: rgba(209,213,219,0.7);
+      transform: translateY(-1px);
+    }
+
+    .burger {
+      display: none;
+      width: 32px;
+      height: 32px;
+      border-radius: 999px;
+      border: 1px solid rgba(55,65,81,0.7);
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+    }
+
+    .burger span {
+      width: 16px;
+      height: 2px;
+      background: var(--text-main);
+      position: relative;
+    }
+
+    .burger span::before,
+    .burger span::after {
+      content: "";
+      position: absolute;
+      width: 16px;
+      height: 2px;
+      background: var(--text-main);
+      left: 0;
+    }
+
+    .burger span::before {
+      top: -5px;
+    }
+
+    .burger span::after {
+      top: 5px;
+    }
+
+    .hero {
+      padding: 60px 0 40px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 3fr) minmax(0, 2.5fr);
+      gap: 40px;
+      align-items: center;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(15,23,42,0.95);
+      border-radius: 999px;
+      padding: 4px 10px;
+      border: 1px solid rgba(55,65,81,0.9);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--text-muted);
+      margin-bottom: 16px;
+    }
+
+    .eyebrow-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: #22c55e;
+      box-shadow: 0 0 10px rgba(34,197,94,0.9);
+    }
+
+    .hero h1 {
+      font-size: clamp(32px, 4vw, 40px);
+      line-height: 1.1;
+      margin-bottom: 14px;
+    }
+
+    .hero-gradient {
+      background: linear-gradient(135deg, #eff6ff, #93c5fd, #dbeafe);
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+
+    .hero p {
+      color: var(--text-muted);
+      max-width: 520px;
+      font-size: 15px;
+      margin-bottom: 22px;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+
+    .hero-hint {
+      font-size: 12px;
+      color: #6b7280;
+    }
+
+    .hero-meta {
+      display: flex;
+      gap: 18px;
+      margin-top: 12px;
+      font-size: 12px;
+      color: #6b7280;
+      flex-wrap: wrap;
+    }
+
+    .hero-meta span::before {
+      content: "• ";
+      color: #4b5563;
+    }
+
+    .hero-card {
+      background: radial-gradient(circle at top, rgba(37,99,235,0.12), rgba(15,23,42,0.95));
+      border-radius: 24px;
+      padding: 20px 18px;
+      border: 1px solid rgba(37,99,235,0.3);
+      box-shadow: var(--shadow-soft);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-card::before {
+      content: "";
+      position: absolute;
+      inset: -40%;
+      background: radial-gradient(circle at top, rgba(59,130,246,0.18), transparent 55%);
+      opacity: 0.9;
+      pointer-events: none;
+    }
+
+    .hero-card-inner {
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-card-title {
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: #bfdbfe;
+      margin-bottom: 12px;
+    }
+
+    .hero-matrix {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0,1fr));
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+
+    .chip {
+      background: rgba(15,23,42,0.8);
+      border-radius: 16px;
+      padding: 8px 10px;
+      border: 1px solid rgba(55,65,81,0.7);
+      font-size: 11px;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .chip-label {
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: #6b7280;
+      font-size: 10px;
+    }
+
+    .chip-main {
+      font-size: 12px;
+    }
+
+    .hero-progress {
+      margin-top: 6px;
+      font-size: 11px;
+      color: #9ca3af;
+    }
+
+    .hero-bar {
+      position: relative;
+      margin-top: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: rgba(15,23,42,0.9);
+      overflow: hidden;
+    }
+
+    .hero-bar-fill {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, #22c55e, #a3e635, #facc15);
+      width: 78%;
+    }
+
+    section {
+      padding: 52px 0;
+    }
+
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      gap: 20px;
+      margin-bottom: 24px;
+      flex-wrap: wrap;
+    }
+
+    .section-title {
+      font-size: 22px;
+    }
+
+    .section-subtitle {
+      font-size: 13px;
+      color: var(--text-muted);
+      max-width: 420px;
+    }
+
+    .tagline {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: #6b7280;
+      margin-bottom: 6px;
+    }
+
+    .card-grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0,1fr));
+      gap: 18px;
+    }
+
+    .card {
+      background: rgba(15,23,42,0.9);
+      border-radius: var(--radius-lg);
+      padding: 18px 16px;
+      border: 1px solid rgba(31,41,55,0.9);
+      box-shadow: 0 14px 34px rgba(0,0,0,0.5);
+    }
+
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+      gap: 8px;
+    }
+
+    .card-title {
+      font-size: 15px;
+      font-weight: 600;
+    }
+
+    .pill {
+      font-size: 10px;
+      padding: 4px 8px;
+      border-radius: 999px;
+      background: rgba(37,99,235,0.1);
+      color: #93c5fd;
+      border: 1px solid rgba(37,99,235,0.5);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+    }
+
+    .card p {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+    }
+
+    .card ul {
+      list-style: none;
+      padding-left: 0;
+      margin: 0;
+    }
+
+    .card ul li {
+      font-size: 13px;
+      color: #d1d5db;
+      padding-left: 16px;
+      position: relative;
+      margin-bottom: 4px;
+    }
+
+    .card ul li::before {
+      content: "•";
+      position: absolute;
+      left: 4px;
+      top: 0;
+      color: #4b5563;
+    }
+
+    .list-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0,1fr));
+      gap: 14px;
+    }
+
+    .pill-card {
+      background: rgba(15,23,42,0.95);
+      border-radius: 999px;
+      padding: 10px 12px;
+      font-size: 13px;
+      border: 1px solid rgba(31,41,55,0.95);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: #e5e7eb;
+    }
+
+    .pill-card span.icon {
+      width: 18px;
+      height: 18px;
+      border-radius: 999px;
+      background: rgba(127,29,29,0.9);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+    }
+
+    .process-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0,1fr));
+      gap: 14px;
+    }
+
+    .step {
+      background: rgba(15,23,42,0.9);
+      border-radius: var(--radius-lg);
+      padding: 14px 12px;
+      border: 1px solid rgba(31,41,55,0.95);
+      position: relative;
+    }
+
+    .step-number {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: #6b7280;
+      margin-bottom: 6px;
+    }
+
+    .step-title {
+      font-size: 14px;
+      margin-bottom: 4px;
+    }
+
+    .step p {
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    .stack-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0,1fr));
+      gap: 10px;
+    }
+
+    .stack-item {
+      border-radius: 999px;
+      border: 1px solid rgba(31,41,55,0.9);
+      background: rgba(15,23,42,0.9);
+      font-size: 12px;
+      padding: 8px 10px;
+      text-align: center;
+      color: #e5e7eb;
+    }
+
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0,1fr));
+      gap: 14px;
+    }
+
+    .price-card {
+      background: rgba(15,23,42,0.96);
+      border-radius: var(--radius-lg);
+      border: 1px solid rgba(31,41,55,0.95);
+      padding: 16px 14px;
+      font-size: 13px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .price-title {
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .price-value {
+      font-size: 16px;
+      font-weight: 700;
+    }
+
+    .price-note {
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
+      gap: 20px;
+      align-items: flex-start;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    label {
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    input, textarea {
+      width: 100%;
+      padding: 9px 10px;
+      border-radius: 12px;
+      border: 1px solid rgba(31,41,55,0.95);
+      background: rgba(15,23,42,0.95);
+      color: var(--text-main);
+      font-size: 13px;
+      outline: none;
+      transition: border-color var(--transition-fast), box-shadow var(--transition-fast), background var(--transition-fast);
+    }
+
+    input:focus,
+    textarea:focus {
+      border-color: rgba(59,130,246,0.9);
+      box-shadow: 0 0 0 1px rgba(59,130,246,0.5);
+      background: rgba(15,23,42,1);
+    }
+
+    textarea {
+      min-height: 90px;
+      resize: vertical;
+    }
+
+    .contact-details {
+      font-size: 13px;
+      color: var(--text-muted);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .contact-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      border-radius: 999px;
+      padding: 7px 10px;
+      background: rgba(15,23,42,0.95);
+      border: 1px solid rgba(31,41,55,0.95);
+      font-size: 12px;
+      color: #e5e7eb;
+      width: fit-content;
+    }
+
+    footer {
+      border-top: 1px solid rgba(31,41,55,0.95);
+      padding: 14px 0 18px;
+      font-size: 11px;
+      color: #6b7280;
+    }
+
+    footer .container {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    @media (max-width: 900px) {
+      .hero-grid,
+      .contact-grid {
+        grid-template-columns: minmax(0,1fr);
+      }
+
+      .card-grid-2,
+      .list-grid,
+      .process-grid,
+      .stack-grid,
+      .pricing-grid {
+        grid-template-columns: minmax(0,1fr);
+      }
+
+      header {
+        background: rgba(2,6,23,0.98);
+      }
+
+      .nav-links {
+        position: fixed;
+        inset: 52px 16px auto 16px;
+        border-radius: 16px;
+        background: rgba(15,23,42,0.98);
+        flex-direction: column;
+        padding: 10px 12px;
+        border: 1px solid rgba(31,41,55,0.95);
+        transform: translateY(-20px);
+        opacity: 0;
+        pointer-events: none;
+      }
+
+      .nav-links.open {
+        transform: translateY(0);
+        opacity: 1;
+        pointer-events: auto;
+      }
+
+      .nav-cta {
+        display: none;
+      }
+
+      .burger {
+        display: inline-flex;
+      }
+
+      .hero {
+        padding-top: 36px;
+      }
+    }
+
+    @media (max-width: 600px) {
+      section {
+        padding: 40px 0;
+      }
+
+      .hero-card {
+        margin-top: 6px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="container nav">
+    <div class="logo">
+      <span class="logo-badge"></span>
+      <span>AGENCY</span>
+    </div>
+    <nav class="nav-links" id="navLinks">
+      <a href="/">Главная</a>
+      <a href="/#services">Услуги</a>
+      <a href="/bitrix24">Битрикс24</a>
+      <a href="/#cases">Кейсы</a>
+      <a href="/#pricing">Стоимость</a>
+      <a href="#contact">Контакты</a>
+    </nav>
+    <div class="nav-cta">
+      <a href="#contact" class="btn btn-secondary">Оставить заявку</a>
+      <button class="btn btn-primary" onclick="scrollToSection('#contact')">Аудит CRM</button>
+    </div>
+    <button class="burger" id="burgerBtn" aria-label="Меню">
+      <span></span>
+    </button>
+  </div>
+</header>
+
+<main>
+  <!-- HERO B24 -->
+  <section class="hero">
+    <div class="container hero-grid">
+      <div>
+        <div class="eyebrow">
+          <span class="eyebrow-dot"></span>
+          <span>Внедрение и доработка Битрикс24</span>
+        </div>
+        <h1>
+          <span class="hero-gradient">Битрикс24 под ваши процессы,</span><br>
+          а не наоборот.
+        </h1>
+        <p>
+          Настраиваем Битрикс24 так, чтобы он поддерживал ваши реальные процессы: продажи, сопровождение клиентов, проекты и задачи. Интегрируем CRM с сайтами, формами и сервисами, чтобы заявки автоматически попадали в нужные воронки.
+        </p>
+        <div class="hero-actions">
+          <a href="#contact" class="btn btn-primary">Заказать внедрение Битрикс24</a>
+          <a href="#formats" class="btn btn-secondary">Запросить аудит CRM</a>
+        </div>
+        <div class="hero-hint">Покажете, как работает бизнес сейчас — предложим схему Битрикс24 и план внедрения.</div>
+        <div class="hero-meta">
+          <span>Внедрение «с нуля» и реанимация существующих порталов</span>
+          <span>Интеграции, автоматизации, обучение команды</span>
+        </div>
+      </div>
+
+      <aside class="hero-card">
+        <div class="hero-card-inner">
+          <div class="hero-card-title">Карта воронок</div>
+          <div class="hero-matrix">
+            <div class="chip">
+              <div class="chip-label">Продажи</div>
+              <div class="chip-main">Тёплые, холодные, партнёры</div>
+            </div>
+            <div class="chip">
+              <div class="chip-label">Обращения</div>
+              <div class="chip-main">Заявки, обращения, задачи</div>
+            </div>
+            <div class="chip">
+              <div class="chip-label">Автоматизации</div>
+              <div class="chip-main">Сделки, задачи, напоминания</div>
+            </div>
+            <div class="chip">
+              <div class="chip-label">Интеграции</div>
+              <div class="chip-main">Сайт, формы, сервисы</div>
+            </div>
+          </div>
+          <div class="hero-progress">
+            Цель: из «CRM как склад контактов» — к управляемой системе
+            <div class="hero-bar">
+              <div class="hero-bar-fill"></div>
+            </div>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <!-- ДЛЯ КОГО -->
+  <section id="for-whom">
+    <div class="container">
+      <div class="section-header">
+        <div>
+          <div class="tagline">Кому подойдёт</div>
+          <h2 class="section-title">Когда имеет смысл внедрять Битрикс24</h2>
+        </div>
+      </div>
+
+      <div class="list-grid">
+        <div class="pill-card">
+          <span class="icon">•</span>
+          Отдел продаж работает в таблицах и мессенджерах, заявки теряются.
+        </div>
+        <div class="pill-card">
+          <span class="icon">•</span>
+          Уже есть Битрикс24, но им пользуется только часть команды.
+        </div>
+        <div class="pill-card">
+          <span class="icon">•</span>
+          Много повторяющихся задач: напоминания, статусы, пересылка информации.
+        </div>
+        <div class="pill-card">
+          <span class="icon">•</span>
+          Нет единой картины по сделкам, задачам и загрузке сотрудников.
+        </div>
+        <div class="pill-card">
+          <span class="icon">•</span>
+          Нужны интеграции с сайтами, формами, ботами и внутренними системами.
+        </div>
+        <div class="pill-card">
+          <span class="icon">•</span>
+          Руководству нужны понятные отчёты и предсказуемая воронка продаж.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ВАРИАНТЫ ВНЕДРЕНИЯ -->
+  <section id="scenarios">
+    <div class="container">
+      <div class="section-header">
+        <div>
+          <div class="tagline">Форматы внедрения</div>
+          <h2 class="section-title">Как мы работаем с Битрикс24</h2>
+        </div>
+        <p class="section-subtitle">
+          Под каждый кейс подбираем конфигурацию: от быстрого запуска до полного пересмотра процессов и интеграций.
+        </p>
+      </div>
+
+      <div class="card-grid-2">
+        <article class="card">
+          <div class="card-header">
+            <div class="card-title">Внедрение «с нуля»</div>
+            <span class="pill">Старт за 2–4 недели</span>
+          </div>
+          <p>Подходит, если CRM ещё нет или портал «пустой».</p>
+          <ul>
+            <li>Анализ процессов и проектирование воронок</li>
+            <li>Настройка сделок, задач, справочников</li>
+            <li>Базовые автоматизации и уведомления</li>
+            <li>Типовые интеграции (сайты, формы, телефония)</li>
+          </ul>
+        </article>
+
+        <article class="card">
+          <div class="card-header">
+            <div class="card-title">Реанимация существующего портала</div>
+            <span class="pill">Навести порядок</span>
+          </div>
+          <p>Если Битрикс24 уже есть, но работает «как-то» и непонятно.</p>
+          <ul>
+            <li>Аудит текущих настроек и сценариев</li>
+            <li>Чистка сущностей, статусов, полей</li>
+            <li>Пересборка воронок и автоматизаций</li>
+            <li>Обучение команды обновлённой логике</li>
+          </ul>
+        </article>
+
+        <article class="card">
+          <div class="card-header">
+            <div class="card-title">Расширение и доработка</div>
+            <span class="pill">Развитие CRM</span>
+          </div>
+          <p>Когда базовый функционал уже работает, но нужно больше.</p>
+          <ul>
+            <li>Сложные роботы и ветвление сценариев</li>
+            <li>Доработка карточек, полей и интерфейса</li>
+            <li>Отчёты и дашборды под руководителя</li>
+            <li>Подключение новых каналов и модулей</li>
+          </ul>
+        </article>
+
+        <article class="card">
+          <div class="card-header">
+            <div class="card-title">Битрикс24 + интеграции</div>
+            <span class="pill">Единая система</span>
+          </div>
+          <p>Если нужно связать Битрикс24 с внешними сервисами и внутренними системами.</p>
+          <ul>
+            <li>Интеграции по API и вебхукам</li>
+            <li>Связка с сайтами, заявочными формами, ботами</li>
+            <li>Вынос логики в отдельные микросервисы</li>
+            <li>Логи и мониторинг обмена данными</li>
+          </ul>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ПРОЦЕСС ВНЕДРЕНИЯ -->
+  <section id="process">
+    <div class="container">
+      <div class="section-header">
+        <div>
+          <div class="tagline">Этапы</div>
+          <h2 class="section-title">Процесс внедрения Битрикс24</h2>
+        </div>
+      </div>
+
+      <div class="process-grid">
+        <div class="step">
+          <div class="step-number">01</div>
+          <div class="step-title">Интервью и аудит</div>
+          <p>Собираем информацию о бизнесе, воронках, ролях, проблемах. Смотрим, что уже сделано в CRM (если есть).</p>
+        </div>
+        <div class="step">
+          <div class="step-number">02</div>
+          <div class="step-title">Проектирование CRM</div>
+          <p>Рисуем схему процессов, определяем сущности, статусы, поля, права, автоматизации и интеграции.</p>
+        </div>
+        <div class="step">
+          <div class="step-number">03</div>
+          <div class="step-title">Настройка портала</div>
+          <p>Создаём воронки, настраиваем карточки, роботы, бизнес-процессы, типовые интеграции.</p>
+        </div>
+        <div class="step">
+          <div class="step-number">04</div>
+          <div class="step-title">Интеграции и тестирование</div>
+          <p>Соединяем Битрикс24 с сайтами и сервисами, тестируем сценарии от заявки до завершения сделок.</p>
+        </div>
+        <div class="step">
+          <div class="step-number">05</div>
+          <div class="step-title">Обучение и запуск</div>
+          <p>Проводим обучение для пользователей и руководства, готовим инструкции и выводим новую логику в работу.</p>
+        </div>
+        <div class="step">
+          <div class="step-number">06</div>
+          <div class="step-title">Сопровождение</div>
+          <p>Собираем обратную связь, корректируем, добавляем новые автоматизации и интеграции по мере роста.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ИНТЕГРАЦИИ -->
+  <section id="integrations">
+    <div class="container">
+      <div class="section-header">
+        <div>
+          <div class="tagline">Интеграции</div>
+          <h2 class="section-title">Что можем связать с Битрикс24</h2>
+        </div>
+        <p class="section-subtitle">
+          Собираем данные в одном месте и строим процессы вокруг Битрикс24 как центральной точки управления.
+        </p>
+      </div>
+
+      <div class="stack-grid">
+        <div class="stack-item">Сайты и лендинги</div>
+        <div class="stack-item">Формы заявок</div>
+        <div class="stack-item">Телефония</div>
+        <div class="stack-item">Email-рассылки</div>
+        <div class="stack-item">Telegram-боты</div>
+        <div class="stack-item">Внутренние сервисы</div>
+        <div class="stack-item">Склад/учёт (через API)</div>
+        <div class="stack-item">Проектные системы</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ТАРИФЫ Б24 -->
+  <section id="formats">
+    <div class="container">
+      <div class="section-header">
+        <div>
+          <div class="tagline">Стоимость</div>
+          <h2 class="section-title">Форматы работ по Битрикс24</h2>
+        </div>
+        <p class="section-subtitle">
+          Цены зависят от количества воронок, ролей, интеграций и сложности процессов. Ниже — ориентиры.
+        </p>
+      </div>
+
+      <div class="pricing-grid">
+        <div class="price-card">
+          <div class="price-title">Базовое внедрение</div>
+          <div class="price-value">от 50 000 ₽</div>
+          <div class="price-note">1–2 воронки, базовые сущности, типовые автоматизации и интеграции.</div>
+        </div>
+        <div class="price-card">
+          <div class="price-title">Расширенное внедрение</div>
+          <div class="price-value">от 120 000 ₽</div>
+          <div class="price-note">Несколько направлений, сложные сценарии, интеграции и отчётность под руководителя.</div>
+        </div>
+        <div class="price-card">
+          <div class="price-title">Реанимация портала</div>
+          <div class="price-value">от 80 000 ₽</div>
+          <div class="price-note">Аудит, чистка, пересборка логики и обучение команды обновлённой системе.</div>
+        </div>
+        <div class="price-card">
+          <div class="price-title">Поддержка и развитие</div>
+          <div class="price-value">по спринтам</div>
+          <div class="price-note">Абонентская поддержка, развитие, новые интеграции и автоматизации.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq">
+    <div class="container">
+      <div class="section-header">
+        <div>
+          <div class="tagline">FAQ</div>
+          <h2 class="section-title">Частые вопросы по Битрикс24</h2>
+        </div>
+      </div>
+
+      <div class="card-grid-2">
+        <article class="card">
+          <div class="card-header">
+            <div class="card-title">Сколько времени занимает внедрение?</div>
+          </div>
+          <p>Базовый проект — от 2 до 4 недель. Сложные внедрения с несколькими воронками и интеграциями — от 4 до 8 недель. Конкретный срок становится понятен после аудита.</p>
+        </article>
+
+        <article class="card">
+          <div class="card-header">
+            <div class="card-title">Нужно ли подключать весь функционал сразу?</div>
+          </div>
+          <p>Нет. Мы идём итерациями: сначала закрываем критичные процессы (заявки и продажи), затем подключаем дополнительные модули и автоматизации.</p>
+        </article>
+
+        <article class="card">
+          <div class="card-header">
+            <div class="card-title">Вы обучаете сотрудников?</div>
+          </div>
+          <p>Да. Проводим обучение для пользователей и руководства, записываем короткие инструкции по ключевым действиям и процессам.</p>
+        </article>
+
+        <article class="card">
+          <div class="card-header">
+            <div class="card-title">Можно доработать портал после запуска?</div>
+          </div>
+          <p>Да. После основного внедрения можем сопровождать проект по спринтам: развивать CRM, добавлять интеграции, настраивать новые отчёты.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="container">
+      <div class="section-header">
+        <div>
+          <div class="tagline">Заявка</div>
+          <h2 class="section-title">Оставьте запрос на внедрение Битрикс24</h2>
+        </div>
+        <p class="section-subtitle">
+          Расскажите, как вы сейчас ведёте продажи и работу с клиентами. Мы предложим вариант структуры Битрикс24 и диапазон бюджета.
+        </p>
+      </div>
+
+      <div class="contact-grid">
+        <form id="contactForm">
+          <div>
+            <label for="name">Имя</label>
+            <input id="name" name="name" type="text" placeholder="Как к вам обращаться?" required>
+          </div>
+          <div>
+            <label for="email">Email</label>
+            <input id="email" name="email" type="email" placeholder="Для связи и отправки предложения" required>
+          </div>
+          <div>
+            <label for="company">Компания / проект</label>
+            <input id="company" name="company" type="text" placeholder="Отрасль, размер, тип клиентов">
+          </div>
+          <div>
+            <label for="message">Опишите текущую ситуацию</label>
+            <textarea id="message" name="message" placeholder="Например: «Заявки идут с сайта и рекламы, всё ведём в таблицах и чатах, хотим перевести продажи в Битрикс24 и не терять клиентов»" required></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary">Отправить заявку</button>
+        </form>
+
+        <div class="contact-details">
+          <div class="contact-pill">
+            <span>tg:</span>
+            <span>@your_agency</span>
+          </div>
+          <div class="contact-pill">
+            <span>email:</span>
+            <span>hello@your-agency.ru</span>
+          </div>
+          <p>
+            В ответ мы предложим формат созвона, зададим уточняющие вопросы и подготовим структуру Битрикс24 под ваш кейс.
+          </p>
+          <p>
+            Если удобнее, можете сразу написать в Telegram с пометкой «Битрикс24».
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="container">
+    <span>© <span id="year"></span> AGENCY. Внедрение и развитие Битрикс24.</span>
+    <span><a href="/" style="color: inherit;">← На главную</a></span>
+  </div>
+</footer>
+
+<script>
+  // Текущий год
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // Бургер
+  const burgerBtn = document.getElementById('burgerBtn');
+  const navLinks = document.getElementById('navLinks');
+
+  if (burgerBtn && navLinks) {
+    burgerBtn.addEventListener('click', () => {
+      navLinks.classList.toggle('open');
+    });
+
+    navLinks.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        navLinks.classList.remove('open');
+      });
+    });
+  }
+
+  // Плавный скролл внутри этой страницы
+  function scrollToSection(selector) {
+    const element = document.querySelector(selector);
+    if (!element) return;
+    const headerOffset = 70;
+    const elementPosition = element.getBoundingClientRect().top + window.pageYOffset;
+    const offsetPosition = elementPosition - headerOffset;
+    window.scrollTo({
+      top: offsetPosition,
+      behavior: 'smooth'
+    });
+  }
+  window.scrollToSection = scrollToSection;
+
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+      const href = this.getAttribute('href');
+      if (href.length > 1) {
+        e.preventDefault();
+        scrollToSection(href);
+      }
+    });
+  });
+
+  // Заглушка формы
+  const form = document.getElementById('contactForm');
+  if (form) {
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      alert('Заявка отправлена. Здесь можно подключить backend (email, CRM, бота и т.п.).');
+      form.reset();
+    });
+  }
+</script>
+
+</body>
+</html>
