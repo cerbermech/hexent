@@ -692,11 +692,43 @@
       flex-wrap: wrap;
     }
 
-    .footer-link {
-      color: #cbd5f5;
+    .cookie-consent {
+      position: fixed;
+      right: 22px;
+      bottom: 22px;
+      max-width: 360px;
+      padding: 16px 18px;
+      border-radius: 16px;
+      background: rgba(8,12,22,0.96);
+      border: 1px solid rgba(59,130,246,0.35);
+      box-shadow: var(--shadow-soft);
+      z-index: 40;
+      display: none;
+      flex-direction: column;
+      gap: 12px;
+      font-size: 13px;
+      color: #e5e7eb;
+    }
+
+    .cookie-consent.visible {
+      display: flex;
+    }
+
+    .cookie-consent strong {
+      font-size: 14px;
+      color: var(--text-main);
+    }
+
+    .cookie-actions {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .cookie-link {
+      color: #93c5fd;
       text-decoration: underline;
-      text-decoration-thickness: 1px;
-      text-underline-offset: 3px;
+      font-size: 12px;
     }
 
     /* Responsive */
@@ -759,6 +791,13 @@
 
       .hero-card {
         margin-top: 6px;
+      }
+
+      .cookie-consent {
+        left: 16px;
+        right: 16px;
+        bottom: 16px;
+        max-width: none;
       }
     }
   </style>
@@ -1189,6 +1228,17 @@
   </div>
 </footer>
 
+<div id="cookieConsent" class="cookie-consent" role="dialog" aria-live="polite" aria-label="Согласие на cookies">
+  <strong>Мы собираем и храним cookies</strong>
+  <span>
+    Это помогает нам анализировать трафик и улучшать сервис. Продолжая пользоваться сайтом, вы соглашаетесь с этим.
+  </span>
+  <div class="cookie-actions">
+    <button type="button" class="btn btn-primary" id="cookieAccept">Согласен</button>
+    <a class="cookie-link" href="#" aria-label="Подробнее о cookies">Подробнее</a>
+  </div>
+</div>
+
 <script>
   // Текущий год в футере
   document.getElementById('year').textContent = new Date().getFullYear();
@@ -1240,6 +1290,23 @@
       e.preventDefault();
       alert('Заявка отправлена. Здесь можно подключить backend (email, CRM, бота и т.п.).');
       form.reset();
+    });
+  }
+
+  // Пуш согласия на cookies
+  const cookieConsent = document.getElementById('cookieConsent');
+  const cookieAccept = document.getElementById('cookieAccept');
+  const cookieKey = 'cookieConsentAccepted';
+
+  if (cookieConsent && cookieAccept) {
+    const isAccepted = localStorage.getItem(cookieKey) === 'true';
+    if (!isAccepted) {
+      cookieConsent.classList.add('visible');
+    }
+
+    cookieAccept.addEventListener('click', () => {
+      localStorage.setItem(cookieKey, 'true');
+      cookieConsent.classList.remove('visible');
     });
   }
 </script>
