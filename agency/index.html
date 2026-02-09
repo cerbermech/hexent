@@ -2,11 +2,10 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
-  <title>Битрикс24 — внедрение и интеграции | Hexent</title>
+  <title>Диджитал-агентство — Автоматизация, SaaS, CRM, интеграции, сайты</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Внедрение и реанимация Битрикс24, автоматизация процессов, интеграции с сайтами, сервисами и ботами.">
+  <meta name="description" content="Разработка приложений и SaaS-сервисов, внедрение CRM, автоматизация бизнес-процессов, интеграции и разработка современных сайтов.">
   <style>
-    /* тот же стиль, что и на главной */
     :root {
       --bg-main: #05060a;
       --bg-alt: #0a0d13;
@@ -185,6 +184,8 @@
       top: 5px;
     }
 
+    /* Hero */
+
     .hero {
       padding: 60px 0 40px;
     }
@@ -348,6 +349,8 @@
       width: 78%;
     }
 
+    /* Sections */
+
     section {
       padding: 52px 0;
     }
@@ -445,6 +448,8 @@
       color: #4b5563;
     }
 
+    /* Problems */
+
     .list-grid {
       display: grid;
       grid-template-columns: repeat(3, minmax(0,1fr));
@@ -473,6 +478,21 @@
       justify-content: center;
       font-size: 11px;
     }
+
+    .solution-banner {
+      margin-top: 14px;
+      padding: 12px 14px;
+      border-radius: 16px;
+      border: 1px solid rgba(37,99,235,0.4);
+      background: linear-gradient(90deg, rgba(37,99,235,0.14), rgba(15,23,42,0.98));
+      font-size: 13px;
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    /* Process */
 
     .process-grid {
       display: grid;
@@ -506,6 +526,43 @@
       color: var(--text-muted);
     }
 
+    /* Cases */
+
+    .cases-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0,1fr));
+      gap: 14px;
+    }
+
+    .case {
+      background: rgba(15,23,42,0.9);
+      border-radius: var(--radius-lg);
+      padding: 16px 14px;
+      border: 1px solid rgba(31,41,55,0.95);
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      font-size: 13px;
+    }
+
+    .case-label {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: #6b7280;
+    }
+
+    .case-title {
+      font-size: 14px;
+    }
+
+    .case-metric {
+      font-size: 12px;
+      color: #bbf7d0;
+    }
+
+    /* Tech */
+
     .stack-grid {
       display: grid;
       grid-template-columns: repeat(4, minmax(0,1fr));
@@ -521,6 +578,8 @@
       text-align: center;
       color: #e5e7eb;
     }
+
+    /* Pricing */
 
     .pricing-grid {
       display: grid;
@@ -553,6 +612,8 @@
       font-size: 12px;
       color: var(--text-muted);
     }
+
+    /* Contact */
 
     .contact-grid {
       display: grid;
@@ -631,6 +692,47 @@
       flex-wrap: wrap;
     }
 
+    .cookie-consent {
+      position: fixed;
+      right: 22px;
+      bottom: 22px;
+      max-width: 360px;
+      padding: 16px 18px;
+      border-radius: 16px;
+      background: rgba(8,12,22,0.96);
+      border: 1px solid rgba(59,130,246,0.35);
+      box-shadow: var(--shadow-soft);
+      z-index: 40;
+      display: none;
+      flex-direction: column;
+      gap: 12px;
+      font-size: 13px;
+      color: #e5e7eb;
+    }
+
+    .cookie-consent.visible {
+      display: flex;
+    }
+
+    .cookie-consent strong {
+      font-size: 14px;
+      color: var(--text-main);
+    }
+
+    .cookie-actions {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .cookie-link {
+      color: #93c5fd;
+      text-decoration: underline;
+      font-size: 12px;
+    }
+
+    /* Responsive */
+
     @media (max-width: 900px) {
       .hero-grid,
       .contact-grid {
@@ -640,6 +742,7 @@
       .card-grid-2,
       .list-grid,
       .process-grid,
+      .cases-grid,
       .stack-grid,
       .pricing-grid {
         grid-template-columns: minmax(0,1fr);
@@ -689,6 +792,13 @@
       .hero-card {
         margin-top: 6px;
       }
+
+      .cookie-consent {
+        left: 16px;
+        right: 16px;
+        bottom: 16px;
+        max-width: none;
+      }
     }
   </style>
 </head>
@@ -702,16 +812,17 @@
     </div>
     <nav class="nav-links" id="navLinks">
       <a href="/">Projects</a>
-      <a href="/agency">Про агентство</a>
-      <a href="/#services">Услуги</a>
+      <a href="#services">Услуги</a>
       <a href="/bitrix24">Битрикс24</a>
-      <a href="/#cases">Кейсы</a>
-      <a href="/#pricing">Стоимость</a>
+      <a href="#problems">Проблемы</a>
+      <a href="#process">Как работаем</a>
+      <a href="#cases">Кейсы</a>
+      <a href="#pricing">Стоимость</a>
       <a href="#contact">Контакты</a>
     </nav>
     <div class="nav-cta">
       <a href="#contact" class="btn btn-secondary">Оставить заявку</a>
-      <button class="btn btn-primary" onclick="scrollToSection('#contact')">Аудит CRM</button>
+      <button class="btn btn-primary" onclick="scrollToSection('#contact')">Обсудить проект</button>
     </div>
     <button class="burger" id="burgerBtn" aria-label="Меню">
       <span></span>
@@ -720,55 +831,53 @@
 </header>
 
 <main>
-  <!-- HERO B24 -->
+  <!-- HERO -->
   <section class="hero">
     <div class="container hero-grid">
       <div>
         <div class="eyebrow">
           <span class="eyebrow-dot"></span>
-          <span>Внедрение и доработка Битрикс24</span>
+          <span>Цифровые системы под ваш бизнес</span>
         </div>
         <h1>
-          <span class="hero-gradient">Битрикс24 под ваши процессы,</span><br>
-          а не наоборот.
+          <span class="hero-gradient">Автоматизируем бизнес.</span><br>
+          Создаём приложения. Интегрируем всё со всем.
         </h1>
         <p>
-          Настраиваем Битрикс24 так, чтобы он поддерживал ваши реальные процессы: продажи, сопровождение клиентов, проекты и задачи. Интегрируем CRM с сайтами, формами и сервисами, чтобы заявки автоматически попадали в нужные воронки.
+          Строим работающие цифровые системы: SaaS-продукты, CRM-процессы, интеграции и автоматизацию любого масштаба.
         </p>
         <div class="hero-actions">
-          <a href="#contact" class="btn btn-primary">Заказать внедрение Битрикс24</a>
-          <a href="#formats" class="btn btn-secondary">Запросить аудит CRM</a>
+          <a href="#contact" class="btn btn-primary">Обсудить проект</a>
         </div>
-        <div class="hero-hint">Покажете, как работает бизнес сейчас — предложим схему Битрикс24 и план внедрения.</div>
+        <div class="hero-hint">Опишите задачу — предложим архитектуру, пути автоматизации и примерный бюджет.</div>
         <div class="hero-meta">
-          <span>Внедрение «с нуля» и реанимация существующих порталов</span>
-          <span>Интеграции, автоматизации, обучение команды</span>
+          <span>Разработка и внедрение под ключ</span>
+          <span>Web / Mobile / CRM / API</span>
         </div>
       </div>
-
       <aside class="hero-card">
         <div class="hero-card-inner">
-          <div class="hero-card-title">Карта воронок</div>
+          <div class="hero-card-title">Панель процессов</div>
           <div class="hero-matrix">
             <div class="chip">
-              <div class="chip-label">Продажи</div>
-              <div class="chip-main">Тёплые, холодные, партнёры</div>
+              <div class="chip-label">Направление</div>
+              <div class="chip-main">Приложения и SaaS</div>
             </div>
             <div class="chip">
-              <div class="chip-label">Обращения</div>
-              <div class="chip-main">Заявки, обращения, задачи</div>
-            </div>
-            <div class="chip">
-              <div class="chip-label">Автоматизации</div>
-              <div class="chip-main">Сделки, задачи, напоминания</div>
+              <div class="chip-label">Процессы</div>
+              <div class="chip-main">CRM &amp; Автоматизация</div>
             </div>
             <div class="chip">
               <div class="chip-label">Интеграции</div>
-              <div class="chip-main">Сайт, формы, сервисы</div>
+              <div class="chip-main">Сервисы, API, боты</div>
+            </div>
+            <div class="chip">
+              <div class="chip-label">Фокус</div>
+              <div class="chip-main">Снять ручную рутину</div>
             </div>
           </div>
           <div class="hero-progress">
-            Цель: из «CRM как склад контактов» — к управляемой системе
+            Цель: из хаоса инструментов — к единой цифровой системе
             <div class="hero-bar">
               <div class="hero-bar-fill"></div>
             </div>
@@ -778,265 +887,279 @@
     </div>
   </section>
 
-  <!-- ДЛЯ КОГО -->
-  <section id="for-whom">
+  <!-- SERVICES -->
+  <section id="services">
     <div class="container">
       <div class="section-header">
         <div>
-          <div class="tagline">Кому подойдёт</div>
-          <h2 class="section-title">Когда имеет смысл внедрять Битрикс24</h2>
+          <div class="tagline">Услуги</div>
+          <h2 class="section-title">Что мы делаем</h2>
+        </div>
+        <p class="section-subtitle">
+          Закрываем полный цикл: от аналитики и проектирования до разработки, внедрения, интеграций и поддержки.
+        </p>
+      </div>
+
+      <div class="card-grid-2">
+        <article class="card">
+          <div class="card-header">
+            <div class="card-title">Разработка приложений и SaaS</div>
+            <span class="pill">MVP 2–6 недель</span>
+          </div>
+          <p>Создаём продукты, которые можно масштабировать: web и мобильные приложения, личные кабинеты, SaaS-платформы.</p>
+          <ul>
+            <li>Проектирование архитектуры и сценариев</li>
+            <li>Прототипы и интерфейсы</li>
+            <li>Разработка, тестирование, запуск</li>
+          </ul>
+        </article>
+
+        <article class="card">
+          <div class="card-header">
+            <div class="card-title">Разработка сайтов</div>
+            <span class="pill">Сайты под задачи</span>
+          </div>
+          <p>Современные быстрые сайты, заточенные под конверсию и удобство: лендинги, корпоративные сайты, продуктовые страницы.</p>
+          <ul>
+            <li>Проработка структуры и позиционирования</li>
+            <li>Адаптивная верстка и UI/UX</li>
+            <li>Интеграция форм, аналитики и CRM</li>
+          </ul>
+        </article>
+
+        <article class="card">
+          <div class="card-header">
+            <div class="card-title">Внедрение CRM</div>
+            <span class="pill">Сделки под контролем</span>
+          </div>
+          <p>Настраиваем CRM так, чтобы ничего не терялось: сделки, задачи, статусы, автоматические действия.</p>
+          <ul>
+            <li>Воронки, статусы, права доступа</li>
+            <li>Автоматические задачи, напоминания, триггеры</li>
+            <li>Отчётность и базовые дашборды</li>
+          </ul>
+        </article>
+
+        <article class="card">
+          <div class="card-header">
+            <div class="card-title">Автоматизация процессов</div>
+            <span class="pill">− ручная рутина</span>
+          </div>
+          <p>Переводим повторяющиеся операции в системы и сценарии, чтобы команда занималась задачами с ценностью.</p>
+          <ul>
+            <li>Внутренние сервисы и панели</li>
+            <li>Боты, уведомления, регламенты в системе</li>
+            <li>Согласования, заявки, статусы в онлайне</li>
+          </ul>
+        </article>
+
+        <article class="card">
+          <div class="card-header">
+            <div class="card-title">Интеграции и API</div>
+            <span class="pill">Единая среда</span>
+          </div>
+          <p>Объединяем разрозненные сервисы в одну систему так, чтобы данные автоматически синхронизировались между ними.</p>
+          <ul>
+            <li>Интеграции по API и вебхукам</li>
+            <li>Микросервисы для обмена данными</li>
+            <li>Логирование и мониторинг взаимодействий</li>
+          </ul>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROBLEMS -->
+  <section id="problems">
+    <div class="container">
+      <div class="section-header">
+        <div>
+          <div class="tagline">Задачи</div>
+          <h2 class="section-title">Какие проблемы закрываем</h2>
         </div>
       </div>
 
       <div class="list-grid">
         <div class="pill-card">
-          <span class="icon">•</span>
-          Отдел продаж работает в таблицах и мессенджерах, заявки теряются.
+          <span class="icon">!</span>
+          Хаос в процессах и отсутствие общей картины
         </div>
         <div class="pill-card">
-          <span class="icon">•</span>
-          Уже есть Битрикс24, но им пользуется только часть команды.
+          <span class="icon">!</span>
+          Лиды, заявки и задачи теряются по дороге
         </div>
         <div class="pill-card">
-          <span class="icon">•</span>
-          Много повторяющихся задач: напоминания, статусы, пересылка информации.
+          <span class="icon">!</span>
+          Всё держится на Excel и ручном контроле
         </div>
         <div class="pill-card">
-          <span class="icon">•</span>
-          Нет единой картины по сделкам, задачам и загрузке сотрудников.
+          <span class="icon">!</span>
+          Сервисы не «разговаривают» между собой
         </div>
         <div class="pill-card">
-          <span class="icon">•</span>
-          Нужны интеграции с сайтами, формами, ботами и внутренними системами.
+          <span class="icon">!</span>
+          Проекты по автоматизации тянутся месяцами
         </div>
         <div class="pill-card">
-          <span class="icon">•</span>
-          Руководству нужны понятные отчёты и предсказуемая воронка продаж.
+          <span class="icon">!</span>
+          Нет единой системы данных и понятных отчётов
         </div>
+      </div>
+
+      <div class="solution-banner">
+        <span>Мы превращаем набор разрозненных инструментов в связную цифровую систему.</span>
+        <button class="btn btn-secondary" onclick="scrollToSection('#contact')">Разобрать ваши процессы</button>
       </div>
     </div>
   </section>
 
-  <!-- ВАРИАНТЫ ВНЕДРЕНИЯ -->
-  <section id="scenarios">
-    <div class="container">
-      <div class="section-header">
-        <div>
-          <div class="tagline">Форматы внедрения</div>
-          <h2 class="section-title">Как мы работаем с Битрикс24</h2>
-        </div>
-        <p class="section-subtitle">
-          Под каждый кейс подбираем конфигурацию: от быстрого запуска до полного пересмотра процессов и интеграций.
-        </p>
-      </div>
-
-      <div class="card-grid-2">
-        <article class="card">
-          <div class="card-header">
-            <div class="card-title">Внедрение «с нуля»</div>
-            <span class="pill">Старт за 2–4 недели</span>
-          </div>
-          <p>Подходит, если CRM ещё нет или портал «пустой».</p>
-          <ul>
-            <li>Анализ процессов и проектирование воронок</li>
-            <li>Настройка сделок, задач, справочников</li>
-            <li>Базовые автоматизации и уведомления</li>
-            <li>Типовые интеграции (сайты, формы, телефония)</li>
-          </ul>
-        </article>
-
-        <article class="card">
-          <div class="card-header">
-            <div class="card-title">Реанимация существующего портала</div>
-            <span class="pill">Навести порядок</span>
-          </div>
-          <p>Если Битрикс24 уже есть, но работает «как-то» и непонятно.</p>
-          <ul>
-            <li>Аудит текущих настроек и сценариев</li>
-            <li>Чистка сущностей, статусов, полей</li>
-            <li>Пересборка воронок и автоматизаций</li>
-            <li>Обучение команды обновлённой логике</li>
-          </ul>
-        </article>
-
-        <article class="card">
-          <div class="card-header">
-            <div class="card-title">Расширение и доработка</div>
-            <span class="pill">Развитие CRM</span>
-          </div>
-          <p>Когда базовый функционал уже работает, но нужно больше.</p>
-          <ul>
-            <li>Сложные роботы и ветвление сценариев</li>
-            <li>Доработка карточек, полей и интерфейса</li>
-            <li>Отчёты и дашборды под руководителя</li>
-            <li>Подключение новых каналов и модулей</li>
-          </ul>
-        </article>
-
-        <article class="card">
-          <div class="card-header">
-            <div class="card-title">Битрикс24 + интеграции</div>
-            <span class="pill">Единая система</span>
-          </div>
-          <p>Если нужно связать Битрикс24 с внешними сервисами и внутренними системами.</p>
-          <ul>
-            <li>Интеграции по API и вебхукам</li>
-            <li>Связка с сайтами, заявочными формами, ботами</li>
-            <li>Вынос логики в отдельные микросервисы</li>
-            <li>Логи и мониторинг обмена данными</li>
-          </ul>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <!-- ПРОЦЕСС ВНЕДРЕНИЯ -->
+  <!-- PROCESS -->
   <section id="process">
     <div class="container">
       <div class="section-header">
         <div>
-          <div class="tagline">Этапы</div>
-          <h2 class="section-title">Процесс внедрения Битрикс24</h2>
+          <div class="tagline">Процесс</div>
+          <h2 class="section-title">Как мы работаем</h2>
         </div>
+        <p class="section-subtitle">
+          Прозрачный поэтапный подход: вы понимаете, что происходит на каждом шаге и за что платите.
+        </p>
       </div>
 
       <div class="process-grid">
         <div class="step">
-          <div class="step-number">01</div>
-          <div class="step-title">Интервью и аудит</div>
-          <p>Собираем информацию о бизнесе, воронках, ролях, проблемах. Смотрим, что уже сделано в CRM (если есть).</p>
+          <div class="step-number">Шаг 1</div>
+          <div class="step-title">Диагностика</div>
+          <p>Соз созвон, изучаем текущие процессы, инструменты и цели. Формируем понимание, что нужно автоматизировать.</p>
         </div>
         <div class="step">
-          <div class="step-number">02</div>
-          <div class="step-title">Проектирование CRM</div>
-          <p>Рисуем схему процессов, определяем сущности, статусы, поля, права, автоматизации и интеграции.</p>
+          <div class="step-number">Шаг 2</div>
+          <div class="step-title">Проектирование</div>
+          <p>Схемы процессов, архитектура, список интеграций, оценка сроков и бюджета. При необходимости — прототип.</p>
         </div>
         <div class="step">
-          <div class="step-number">03</div>
-          <div class="step-title">Настройка портала</div>
-          <p>Создаём воронки, настраиваем карточки, роботы, бизнес-процессы, типовые интеграции.</p>
+          <div class="step-number">Шаг 3</div>
+          <div class="step-title">Разработка и внедрение</div>
+          <p>Реализуем функционал спринтами, показываем промежуточные версии, собираем обратную связь.</p>
         </div>
         <div class="step">
-          <div class="step-number">04</div>
-          <div class="step-title">Интеграции и тестирование</div>
-          <p>Соединяем Битрикс24 с сайтами и сервисами, тестируем сценарии от заявки до завершения сделок.</p>
+          <div class="step-number">Шаг 4</div>
+          <div class="step-title">Интеграции и тесты</div>
+          <p>Подключаем внешние сервисы, проверяем сценарии, фиксируем возможные узкие места.</p>
         </div>
         <div class="step">
-          <div class="step-number">05</div>
-          <div class="step-title">Обучение и запуск</div>
-          <p>Проводим обучение для пользователей и руководства, готовим инструкции и выводим новую логику в работу.</p>
+          <div class="step-number">Шаг 5</div>
+          <div class="step-title">Запуск</div>
+          <p>Выводим систему в прод, сопровождаем старт, дорабатываем по первым неделям эксплуатации.</p>
         </div>
         <div class="step">
-          <div class="step-number">06</div>
-          <div class="step-title">Сопровождение</div>
-          <p>Собираем обратную связь, корректируем, добавляем новые автоматизации и интеграции по мере роста.</p>
+          <div class="step-number">Шаг 6</div>
+          <div class="step-title">Поддержка</div>
+          <p>По договорённости остаёмся на сопровождении: следим, развиваем, добавляем новые интеграции и модули.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ИНТЕГРАЦИИ -->
-  <section id="integrations">
+  <!-- CASES -->
+  <section id="cases">
     <div class="container">
       <div class="section-header">
         <div>
-          <div class="tagline">Интеграции</div>
-          <h2 class="section-title">Что можем связать с Битрикс24</h2>
+          <div class="tagline">Кейсы</div>
+          <h2 class="section-title">Примеры задач</h2>
         </div>
         <p class="section-subtitle">
-          Собираем данные в одном месте и строим процессы вокруг Битрикс24 как центральной точки управления.
+          Примеры типовых проектов. Под ваш бизнес соберём конфигурацию и стек под задачи.
         </p>
       </div>
 
-      <div class="stack-grid">
-        <div class="stack-item">Сайты и лендинги</div>
-        <div class="stack-item">Формы заявок</div>
-        <div class="stack-item">Телефония</div>
-        <div class="stack-item">Email-рассылки</div>
-        <div class="stack-item">Telegram-боты</div>
-        <div class="stack-item">Внутренние сервисы</div>
-        <div class="stack-item">Склад/учёт (через API)</div>
-        <div class="stack-item">Проектные системы</div>
+      <div class="cases-grid">
+        <article class="case">
+          <div class="case-label">Кейс 01</div>
+          <div class="case-title">Система заявок и процессов для B2B-компании</div>
+          <p>Построили единую систему обработки обращений: от первой заявки до закрывающих документов.</p>
+          <p class="case-metric">Результат: −60% ручной работы менеджеров.</p>
+        </article>
+
+        <article class="case">
+          <div class="case-label">Кейс 02</div>
+          <div class="case-title">SaaS-платформа для малого бизнеса</div>
+          <p>Разработали MVP web-приложения с личными кабинетами, подписками и базовой аналитикой.</p>
+          <p class="case-metric">Результат: запуск за 6 недель, первые платные пользователи в первый месяц.</p>
+        </article>
+
+        <article class="case">
+          <div class="case-label">Кейс 03</div>
+          <div class="case-title">Интеграционный слой между сервисами</div>
+          <p>Создали микросервисы, которые синхронизируют данные между несколькими внутренними и внешними системами.</p>
+          <p class="case-metric">Результат: стабильная синхронизация и прозрачное логирование.</p>
+        </article>
       </div>
     </div>
   </section>
 
-  <!-- ТАРИФЫ Б24 -->
-  <section id="formats">
+  <!-- TECH -->
+  <section id="tech">
+    <div class="container">
+      <div class="section-header">
+        <div>
+          <div class="tagline">Стек</div>
+          <h2 class="section-title">Технологии</h2>
+        </div>
+      </div>
+
+      <div class="stack-grid">
+        <div class="stack-item">Node.js</div>
+        <div class="stack-item">Python</div>
+        <div class="stack-item">React</div>
+        <div class="stack-item">Next.js</div>
+        <div class="stack-item">PostgreSQL</div>
+        <div class="stack-item">MongoDB</div>
+        <div class="stack-item">Docker</div>
+        <div class="stack-item">Nginx</div>
+        <div class="stack-item">Bitrix24</div>
+        <div class="stack-item">amoCRM</div>
+        <div class="stack-item">Telegram API</div>
+        <div class="stack-item">Webhooks</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRICING -->
+  <section id="pricing">
     <div class="container">
       <div class="section-header">
         <div>
           <div class="tagline">Стоимость</div>
-          <h2 class="section-title">Форматы работ по Битрикс24</h2>
+          <h2 class="section-title">Форматы работы и бюджеты</h2>
         </div>
         <p class="section-subtitle">
-          Цены зависят от количества воронок, ролей, интеграций и сложности процессов. Ниже — ориентиры.
+          Оценка зависит от сложности процессов и количества интеграций. Ниже — ориентиры по чекам.
         </p>
       </div>
 
       <div class="pricing-grid">
         <div class="price-card">
-          <div class="price-title">Базовое внедрение</div>
+          <div class="price-title">Разработка приложений и SaaS</div>
+          <div class="price-value">от 150 000 ₽</div>
+          <div class="price-note">MVP, базовый функционал, запуск и сопровождение старта.</div>
+        </div>
+        <div class="price-card">
+          <div class="price-title">Спринты разработки</div>
+          <div class="price-value">от 80 000 ₽ / 2 недели</div>
+          <div class="price-note">Подходит, если уже есть продукт и нужно развитие.</div>
+        </div>
+        <div class="price-card">
+          <div class="price-title">Внедрение CRM</div>
           <div class="price-value">от 50 000 ₽</div>
-          <div class="price-note">1–2 воронки, базовые сущности, типовые автоматизации и интеграции.</div>
+          <div class="price-note">Настройка воронок, автоматизаций и базовой отчётности.</div>
         </div>
         <div class="price-card">
-          <div class="price-title">Расширенное внедрение</div>
-          <div class="price-value">от 120 000 ₽</div>
-          <div class="price-note">Несколько направлений, сложные сценарии, интеграции и отчётность под руководителя.</div>
+          <div class="price-title">Интеграции и автоматизация</div>
+          <div class="price-value">от 15 000 ₽</div>
+          <div class="price-note">Стоимость одной точки интеграции или простого сценария.</div>
         </div>
-        <div class="price-card">
-          <div class="price-title">Реанимация портала</div>
-          <div class="price-value">от 80 000 ₽</div>
-          <div class="price-note">Аудит, чистка, пересборка логики и обучение команды обновлённой системе.</div>
-        </div>
-        <div class="price-card">
-          <div class="price-title">Поддержка и развитие</div>
-          <div class="price-value">по спринтам</div>
-          <div class="price-note">Абонентская поддержка, развитие, новые интеграции и автоматизации.</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- FAQ -->
-  <section id="faq">
-    <div class="container">
-      <div class="section-header">
-        <div>
-          <div class="tagline">FAQ</div>
-          <h2 class="section-title">Частые вопросы по Битрикс24</h2>
-        </div>
-      </div>
-
-      <div class="card-grid-2">
-        <article class="card">
-          <div class="card-header">
-            <div class="card-title">Сколько времени занимает внедрение?</div>
-          </div>
-          <p>Базовый проект — от 2 до 4 недель. Сложные внедрения с несколькими воронками и интеграциями — от 4 до 8 недель. Конкретный срок становится понятен после аудита.</p>
-        </article>
-
-        <article class="card">
-          <div class="card-header">
-            <div class="card-title">Нужно ли подключать весь функционал сразу?</div>
-          </div>
-          <p>Нет. Мы идём итерациями: сначала закрываем критичные процессы (заявки и продажи), затем подключаем дополнительные модули и автоматизации.</p>
-        </article>
-
-        <article class="card">
-          <div class="card-header">
-            <div class="card-title">Вы обучаете сотрудников?</div>
-          </div>
-          <p>Да. Проводим обучение для пользователей и руководства, записываем короткие инструкции по ключевым действиям и процессам.</p>
-        </article>
-
-        <article class="card">
-          <div class="card-header">
-            <div class="card-title">Можно доработать портал после запуска?</div>
-          </div>
-          <p>Да. После основного внедрения можем сопровождать проект по спринтам: развивать CRM, добавлять интеграции, настраивать новые отчёты.</p>
-        </article>
       </div>
     </div>
   </section>
@@ -1046,11 +1169,11 @@
     <div class="container">
       <div class="section-header">
         <div>
-          <div class="tagline">Заявка</div>
-          <h2 class="section-title">Оставьте запрос на внедрение Битрикс24</h2>
+          <div class="tagline">Контакты</div>
+          <h2 class="section-title">Давайте разберём ваш запрос</h2>
         </div>
         <p class="section-subtitle">
-          Расскажите, как вы сейчас ведёте продажи и работу с клиентами. Мы предложим вариант структуры Битрикс24 и диапазон бюджета.
+          Опишите, что хотите автоматизировать или какой продукт планируете. Мы вернёмся с вопросами, предложениями и оценкой.
         </p>
       </div>
 
@@ -1066,11 +1189,11 @@
           </div>
           <div>
             <label for="company">Компания / проект</label>
-            <input id="company" name="company" type="text" placeholder="Отрасль, размер, тип клиентов">
+            <input id="company" name="company" type="text" placeholder="Можно кратко: отрасль, размер">
           </div>
           <div>
-            <label for="message">Опишите текущую ситуацию</label>
-            <textarea id="message" name="message" placeholder="Например: «Заявки идут с сайта и рекламы, всё ведём в таблицах и чатах, хотим перевести продажи в Битрикс24 и не терять клиентов»" required></textarea>
+            <label for="message">Что нужно сделать?</label>
+            <textarea id="message" name="message" placeholder="Например: внедрить CRM и связать её с сервисами, автоматизировать заявки, разработать SaaS-продукт или сайт…" required></textarea>
           </div>
           <button type="submit" class="btn btn-primary">Отправить заявку</button>
         </form>
@@ -1085,10 +1208,10 @@
             <span>hello@your-agency.ru</span>
           </div>
           <p>
-            В ответ мы предложим формат созвона, зададим уточняющие вопросы и подготовим структуру Битрикс24 под ваш кейс.
+            После заявки мы предложим формат созвона, уточним детали и отправим ориентировочный бюджет и план работ.
           </p>
           <p>
-            Если удобнее, можете сразу написать в Telegram с пометкой «Битрикс24».
+            Если удобнее, вы можете сразу написать нам в Telegram с пометкой «Автоматизация» или «SaaS».
           </p>
         </div>
       </div>
@@ -1098,17 +1221,30 @@
 
 <footer>
   <div class="container">
-    <span>© <span id="year"></span> Hexent. Внедрение и развитие Битрикс24.</span>
-    <span><a href="/" style="color: inherit;">← Projects</a></span>
-    <span><a href="/agency" style="color: inherit;">Про агентство</a></span>
+    <span>© <span id="year"></span> Hexent. Цифровые системы под ваш бизнес.</span>
+    <span>
+      <a class="footer-link" href="/privacy/">Политика конфиденциальности</a>
+      <span>• Хостинг: собственный VPS • HTML / CSS / JS</span>
+    </span>
   </div>
 </footer>
 
+<div id="cookieConsent" class="cookie-consent" role="dialog" aria-live="polite" aria-label="Согласие на cookies">
+  <strong>Мы собираем и храним cookies</strong>
+  <span>
+    Это помогает нам анализировать трафик и улучшать сервис. Продолжая пользоваться сайтом, вы соглашаетесь с этим.
+  </span>
+  <div class="cookie-actions">
+    <button type="button" class="btn btn-primary" id="cookieAccept">Согласен</button>
+    <a class="cookie-link" href="#" aria-label="Подробнее о cookies">Подробнее</a>
+  </div>
+</div>
+
 <script>
-  // Текущий год
+  // Текущий год в футере
   document.getElementById('year').textContent = new Date().getFullYear();
 
-  // Бургер
+  // Бургер-меню
   const burgerBtn = document.getElementById('burgerBtn');
   const navLinks = document.getElementById('navLinks');
 
@@ -1117,14 +1253,14 @@
       navLinks.classList.toggle('open');
     });
 
-    navLinks.querySelectorAll('a').forEach(link => {
+    navLinks.querySelectorAll('a[href^="#"]').forEach(link => {
       link.addEventListener('click', () => {
         navLinks.classList.remove('open');
       });
     });
   }
 
-  // Плавный скролл внутри этой страницы
+  // Плавный скролл
   function scrollToSection(selector) {
     const element = document.querySelector(selector);
     if (!element) return;
@@ -1148,7 +1284,7 @@
     });
   });
 
-  // Заглушка формы
+  // Заглушка отправки формы
   const form = document.getElementById('contactForm');
   if (form) {
     form.addEventListener('submit', function (e) {
@@ -1157,7 +1293,23 @@
       form.reset();
     });
   }
-</script>
 
+  // Пуш согласия на cookies
+  const cookieConsent = document.getElementById('cookieConsent');
+  const cookieAccept = document.getElementById('cookieAccept');
+  const cookieKey = 'cookieConsentAccepted';
+
+  if (cookieConsent && cookieAccept) {
+    const isAccepted = localStorage.getItem(cookieKey) === 'true';
+    if (!isAccepted) {
+      cookieConsent.classList.add('visible');
+    }
+
+    cookieAccept.addEventListener('click', () => {
+      localStorage.setItem(cookieKey, 'true');
+      cookieConsent.classList.remove('visible');
+    });
+  }
+</script>
 </body>
 </html>
